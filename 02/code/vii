@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]
+then
+	echo "参数不对！再见！"
+fi
+
+suffix=`echo $1 | sed 's/.*\.\(.*\)/.\1/'`
+#suffix=`echo $1 | sed 's/[^.]*//'`
+
+
+if [ $suffix != ".c" ]
+then
+	vi $1
+	exit
+else
+	# 判断c文件是否已经存在
+	if [ -e $1 ]
+	then
+		vi $1
+		exit
+	else
+		cp sample.c $1
+		vi $1
+		exit
+	fi
+fi
